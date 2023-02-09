@@ -27,26 +27,28 @@
 		<Indicator />
 		Canlı Son Depremler
 	</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Tarih</th>
-				<th>Mahalle</th>
-				<th>Konum</th>
-				<th>Büyüklük</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each datas as data (data.id)}
-				<tr in:fade>
-					<td>{data.date}</td>
-					<td>{data.neighborhood}</td>
-					<td>{data.location}</td>
-					<td>{data.magnitude}</td>
+	<div class="tableWrapper">
+		<table>
+			<thead>
+				<tr>
+					<th>Tarih</th>
+					<th>Mahalle</th>
+					<th>Konum</th>
+					<th>Büyüklük</th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{#each datas as data (data.id)}
+					<tr in:fade>
+						<td>{data.date}</td>
+						<td>{data.neighborhood}</td>
+						<td>{data.location}</td>
+						<td>{data.magnitude}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 {#if error}
@@ -57,7 +59,7 @@
 	.container {
 		background: #ffebee;
 		width: 100vw;
-		height: 100vh;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -65,27 +67,57 @@
 	}
 
 	h1 {
-		font-size: 56px;
+		font-size: 32px;
 		font-weight: 700;
 		color: #b71c1c;
 		display: flex;
 		align-items: center;
+		text-align: center;
 		gap: 1rem;
 	}
 
+	.tableWrapper {
+		margin-top: 2rem;
+		overflow-x: auto;
+		font-size: 12px;
+	}
+
 	table {
-		margin-top: 48px;
+		table-layout: fixed;
+		width: 100vw;
 	}
 
 	th {
-		width: 15vw;
 		font-weight: 700;
 		color: #b71c1c;
 	}
 
 	td,
 	th {
-		padding: 1rem;
+		width: 25vw;
+		padding: 0.75rem;
+		overflow: hidden;
 		text-align: center;
+	}
+
+	@media (min-width: 1024px) {
+		h1 {
+			font-size: 5rem;
+		}
+
+		.tableWrapper {
+			margin-top: 4rem;
+			font-size: 1rem;
+		}
+
+		table {
+			width: auto;
+		}
+
+		td,
+		th {
+			width: 15vw;
+			padding: 1rem;
+		}
 	}
 </style>
